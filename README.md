@@ -1,40 +1,60 @@
 # pi
 
-Workspace root for Pi packages. The repo root is not an installable Pi package.
+Workspace root for Pi packages and repo-local agents.
 
-## Packages
+This repository is **not** itself an installable Pi package. Today it primarily publishes **`@oracleot-tools/orchestrate`**, a shareable Pi package for a hub-and-spoke workflow where a main orchestrator delegates repo work to isolated subagents.
 
-- `@oracleot-tools/orchestrate` → `packages/orchestrate`
+## What ships from this repo
 
-See `packages/orchestrate/README.md` for package-specific install, update, and behavior details.
+Published package: [`@oracleot-tools/orchestrate`](packages/orchestrate/README.md)
+
+That package bundles:
+- `/orchestrate` and `/hub`
+- the `subagent` tool
+- bundled base agents: `orchestrator`, `planner`, `scout`, `worker`
+
+For package behavior, updates, and package-specific details, use the authoritative package README:
+
+- [`packages/orchestrate/README.md`](packages/orchestrate/README.md)
 
 ## Install
 
-Use the published npm package for normal user installs:
+Canonical end-user install route:
 
 ```bash
 pi install npm:@oracleot-tools/orchestrate
 ```
 
-Use `-l` only when you want the package recorded in project-local settings (`.pi/settings.json`) for the current repo instead of your user settings:
+Use `-l` only when you want the package recorded in the current repo's `.pi/settings.json` instead of your user settings:
 
 ```bash
 pi install -l npm:@oracleot-tools/orchestrate
 ```
 
-## Contributor checkout installs
+## Contributor checkout install
 
-- The repository root is a private workspace root, not an installable Pi package.
-- Install from the package directory, not the repo root:
+Install from the package directory, **not** the repo root:
 
 ```bash
 pi install /absolute/path/to/pi/packages/orchestrate
 ```
 
-If you intentionally want that checkout source scoped to this repo only, add `-l`.
+Why: the repo root is a private npm workspace root (`private: true`), while the installable Pi package lives at `packages/orchestrate`.
 
-## Repo-local resources
+## Repo-local `.pi/agents`
 
-- Repo-local specialist agents remain at `.pi/agents/`.
-- Those project-local agents are not published with `@oracleot-tools/orchestrate`.
-- Project-local agents can override bundled package agents with the same name when Pi is run with project-agent scope enabled.
+This repo also keeps project-local agents in [`.pi/agents/`](.pi/agents/).
+
+Those agents are:
+- local to this repository
+- not published with `@oracleot-tools/orchestrate`
+- available as project-scoped overrides when Pi is run with project agent scope enabled
+
+In practice: bundled package agents provide the reusable baseline, while repo-local agents let this checkout carry durable specialists for work on this repository itself.
+
+## Docs map
+
+- Root overview: [`README.md`](README.md)
+- Package install/behavior reference: [`packages/orchestrate/README.md`](packages/orchestrate/README.md)
+- Current implementation notes: [`docs/implementation-plan.md`](docs/implementation-plan.md)
+- Repo-local agents used in this checkout: [`.pi/agents/`](.pi/agents/)
