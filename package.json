@@ -1,0 +1,9 @@
+{
+  "name": "pi",
+  "private": true,
+  "description": "Private workspace root for Pi packages and repo-local .pi agents.",
+  "packageManager": "npm@11.13.0",
+  "workspaces": [
+    "packages/*"
+  ]
+}
