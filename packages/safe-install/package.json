@@ -1,0 +1,43 @@
+{
+  "name": "@oracleot-tools/safe-install",
+  "version": "0.1.0",
+  "description": "Pi slash-command package that audits npm packages before installing them with --ignore-scripts.",
+  "license": "MIT",
+  "homepage": "https://github.com/oracleot/pi/tree/main/packages/safe-install#readme",
+  "bugs": {
+    "url": "https://github.com/oracleot/pi/issues"
+  },
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "safe-install",
+    "npm-security"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oracleot/pi.git",
+    "directory": "packages/safe-install"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "extensions",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test extensions/package-spec.test.mjs"
+  },
+  "pi": {
+    "extensions": [
+      "extensions/index.ts"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-agent-core": "*",
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*",
+    "typebox": "*"
+  }
+}
